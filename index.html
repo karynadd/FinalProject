@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tarot Talks</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<style type="text/css">
+		@font-face {font-family: 'Calypso'; src: url('fonts/Calypso.ttf') format('truetype'); font-weight: normal;font-style: normal;}
+		* {margin: 0; padding: 0; box-sizing: border-box;}
+		body {font-family: 'Calypso', serif; color: #f5c944; scroll-behavior: smooth; background: #0F101D}
+		.container {height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-image: url('back2.png'); background-size: cover; background-position: center; backdrop-filter: blur(2px); padding: 60px 20px; text-align: center; backdrop-filter: blur(2px);}
+		.candle {position: absolute; width: 70px; z-index: 2; animation: float 3s ease-in-out infinite;}
+		.candle1 {top: 120px; left: 1200px; animation-delay: 0s;}
+		.candle2 {top:110px; left: 400px; animation-delay: 0.3s;}
+		.candle3 {top:350px; left: 140px; animation-delay: 0.6s;}
+		.candle4 {top:350px; left: 1400px; animation-delay: 0.9s;}
+		.candle5 {top:600px; left: 400px; animation-delay: 0.2s;}
+		.candle6 {top:600px; left: 1200px; animation-delay: 0.5s;}
+		@keyframes float {0% {transform: translateY(0);} 50% {transform: translateY(-40px);} 100% {transform: translateY(0);}}
+		.container2 {height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; text-align: center; backdrop-filter: blur(2px);}
+		h1 {font-size: 70px; line-height: 1.2; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);}
+		h2 {font-size: 25px; line-height: 1.2; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); padding-top: 15px;}
+		@keyframes fadeInUptext {0% {opacity: 0; transform: translateY(30px);} 100% {opacity: 1; transform: translateY(0);}}
+		.bg-pic {background: url(Back3.png); background-size: cover; background-position: center; background-attachment: fixed;}
+		.bg-pic2 {background: url(Back4.png); background-size: cover; background-position: center; background-attachment: fixed;}
+		.bg-pic3 {background: url(Back5.png); background-size: cover; background-position: center; background-attachment: fixed;}
+		.bg-pic4 {background: url(Back6.png); background-size: cover; background-position: center; background-attachment: fixed;}
+		.fade-in-text {opacity: 0; animation: fadeInUptext 0.8s forwards;}
+		.fade-in-text.delay-1 {animation-delay: 0.2s;}
+		.fade-in-text.delay-2 {animation-delay: 0.4s;}
+		.h1add {font-size: 90px; line-height: 1.2; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);}
+		.cta-button {display: inline-block; margin-top: 70px; padding: 12px 32px; background: #f5c944; color: #222;font-size: 20px; text-decoration: none; border-radius: 30px; box-shadow: 0 0 20px 5px rgba(245, 201, 68, 0.5); transition: all 0.3s ease;} 
+		.cta-button:hover {box-shadow: 0 0 30px 10px rgba(245, 201, 68, 0.8); background-color: #ffe066;}
+		.subtitle {font-size: 18px; margin-top: 30px; margin-bottom: 50px;}
+		.cards {display: flex; justify-items: center; gap: 70px; margin-bottom: 40px;}
+		.card1 {width: 246px; height: 420px; object-fit: cover; border: 1px solid #f5c944; box-shadow: 0 40px 50px rgba(245, 201, 68, 0.3); opacity: 0; animation: fadeInOpacity 0.6s forwards;}
+		.card2 {width: 246px; height: 420px; object-fit: cover; border: 1px solid #f5c944; box-shadow: 0 40px 50px rgba(245, 201, 68, 0.3); opacity: 0; animation: fadeInOpacity 0.6s forwards;}
+		.card3 {width: 246px; height: 420px; object-fit: cover; border: 1px solid #f5c944; box-shadow: 0 40px 50px rgba(245, 201, 68, 0.3); opacity: 0; animation: fadeInOpacity 0.6s forwards;}
+		.card1, .card2, .card3 {transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer;}
+		.card1:hover, .card2:hover, .card3:hover {transform: translateY(-10px); box-shadow: 0 50px 60px rgba(245, 201, 68, 0.5);}
+		.card1:active, .card2:active, .card3:active {transform: translateY(2px); box-shadow: 0 30px 40px rgba(245, 201, 68, 0.3);}
+		.cardresult {width: 246px; height: 420px; object-fit: cover; border: 1px solid #f5c944; box-shadow: 0 40px 50px rgba(245, 201, 68, 0.3);}
+		@keyframes fadeInOpacity {from {opacity: 0;} to {opacity: 1;}}
+		.cardresult {height:420px; border: 2px; box-shadow: 0 20px 40px rgba(245, 201, 68, 0.2);}
+		.result-content-side {display: flex; gap: 60px; align-items: flex-start; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;}
+		.text-box-group {display: flex; flex-direction: column; gap: 40px; max-width: 650px;}
+		.result-box {position: relative; border: 2px solid #f5c944; border-radius: 30px; padding: 40px 30px 30px; background-color: #1e1e1e; box-shadow: 0 0 40px rgba(245, 201, 68, 0.15); color: #f5c944; font-size: 16px; line-height: 1.6; text-align: left; max-width: 609px; max-height: 420px;}
+		.result-title {position: absolute; top: -22px; left: 30px; background-color: #f5c944; color: #222; padding: 10px 20px; fon-size: 18px; font-family: 'Calypso', serif; border-radius: 30px; box-shadow: 0 3px 8px rgba(245, 201, 68, 0.3); white-space: nowrap; z-index: 2;}
+		.result-body {background-color: #1e1e1e; color: #f5c944; border-bottom-left-radius: 30px;border-bottom-right-radius: 30px; font-size: 16px; line-height: 1.6;}}
+		.result-advice {font-size: 20px; font-weight: 500;}
+		.card-flip {perspective: 1000px; width: 170px; height: 350px; padding-top: 50px;}
+		.card-inner {width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spinCard 4s linear infinite;}
+		.card-inner.burning {animation: burn 1.5s forwards;}
+		@keyframes spinCard {from {transform: rotateY(0deg);} to {transform: rotateY(360deg);}}
+		@keyframes burn {0% {opacity: 1; transform: scale(1.0) rotate(0deg); filter: brightness(1.0) blur(0px);} 50% {opacity: 0.7; transform: scale(1.1) rotate(10deg); filter: brightness(1.5) blur(2px);} 100% {opacity: 0; transform: scale(0.5) rotate(20deg); filter: brightness(2) blur(5px);}}
+		.card-front, .card-back {position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px;}
+		.card-front {transform: rotateY(0deg); z-index: 2;}
+		.card-back {transform: rotateY(180deg);}
+		.card-front img, .card-back img {width: 100%; height: 100%; object-fit: cover; border-radius: 12px;}
+
+
+	</style>
+</head>
+<body>
+		<section id="intro" class="container">
+
+			<img src="candle.gif" class="candle candle1">
+			<img src="candle.gif" class="candle candle2">
+			<img src="candle.gif" class="candle candle3">
+			<img src="candle.gif" class="candle candle4">
+			<img src="candle.gif" class="candle candle5">
+			<img src="candle.gif" class="candle candle6">
+  
+			<h1 class="fade-in-text">DO YOU BELIVE</h1>
+			<h1 class="h1add fade-in-text">TAROT?</h1>
+			<a href="#love" class="cta-button">Start Reading →</a>
+		</section>
+
+		<section id="love" class="container2 bg-pic">
+			<h1 class="fade-in-text">LOVE AND RELATIONSHIPS</h1>
+			<p class="subtitle fade-in-text">What do the cards say about your love life?</p>
+
+			<div class="cards">
+				<img src="cardback.png" alt="Tarot Card" class="card1" onclick="showLoveResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card2" onclick="showLoveResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card3" onclick="showLoveResult()">
+			</div>
+
+			<a href="#" class="cta-button" id="drawButton">Draw Tarot →</a>
+		</section>
+
+		<section id="loveResult" class="container2 bg-pic" style="display: none;">
+			<h1 class="fade-in-text">LOVE AND RELATIONSHIPS</h1>
+			<p class="subtitle fade-in-text">Choose one card below</p>
+			<div class="result-content-side">
+			  <img src="" alt="Card Result" class="cardresult">
+
+			  <div class="text-box-group">
+			    <div class="result-box">
+			      <div class="result-title">Queen of Swords – Love & Relationships</div>
+			      <div class="result-body">
+			        <p>
+			          A time for honesty and clear thinking in love. This card suggests emotional maturity, healthy boundaries, and the courage to see things as they are.
+			        </p>
+			        <p class="result-advice">
+			          <strong>Advice:</strong><br>
+			          Love wisely. Be kind, but don’t ignore red flags.
+			        </p>
+			      </div>
+			    </div>
+
+			    <div class="result-box">
+			      <div class="result-title">검의 여왕 – 사랑과 관계</div>
+			      <div class="result-body">
+			        <p>
+			          사랑에서 정직함과 명확한 사고가 필요한 시기이다. 이 카드는 감정적 성숙, 건강한 경계 설정, 그리고 상황을 있는 그대로 바라보는 용기를 의미한다.
+			        </p>
+			        <p class="result-advice">
+			          <strong>추천:</strong><br>
+			          현명하게 사랑하세요. 친절하되, 경고 신호를 무시하지 마세요.
+			        </p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</section>
+
+		<section id="career" class="container2 bg-pic2">
+			<h1 class="fade-in-text">CAREER & FINANCES</h1>
+			<p class="subtitle fade-in-text">What do the cards say about your career?</p>
+
+			<div class="cards">
+				<img src="cardback.png" alt="Tarot Card" class="card1" onclick="showCareerResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card2" onclick="showCareerResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card3" onclick="showCareerResult()">
+			</div>
+
+			<a href="#" class="cta-button" id="drawButton">Draw Tarot →</a>
+		</section>
+
+		<section id="careerResult" class="container2 bg-pic2" style="display: none;">
+			<h1 class="fade-in-text">Career & Finances</h1>
+			<p class="subtitle fade-in-text">Choose one card below</p>
+			<div class="result-content-side">
+			  <img src="TheMoon.png" alt="The Moon" class="cardresult">
+
+			  <div class="text-box-group">
+			    <div class="result-box">
+			      <div class="result-title">The Moon – Career & Finances</div>
+			      <div class="result-body">
+			        <p>
+			          The Moon indicates uncertainty, confusion, or hidden factors in your work or financial situation. Things may not be as they seem — trust your intuition, and avoid making major decisions until you have more clarity. Be cautious of illusions or misleading offers.
+			        </p>
+			        <p class="result-advice">
+			          <strong>Advice:</strong><br>
+			          Take time to reflect. Don’t rush. Follow your instincts, not just logic.
+			        </p>
+			      </div>
+			    </div>
+
+			    <div class="result-box">
+			      <div class="result-title">달 카드 – 직업 & 재정</div>
+			      <div class="result-body">
+			        <p>
+			          달 카드는 직장이나 재정 상황에서 불확실성이나 혼란, 또는 감춰진 요소들이 있음을 나타낸다. 겉보기와 다른 진실이 있을 수 있으니, 직관을 믿고 섣부른 결정을 피하세요. 허상이나 속이는 제안에 주의가 필요하다.
+			        </p>
+			        <p class="result-advice">
+			          <strong>추천:</strong><br>
+			          서두르지 말고 시간을 갖고 상황을 지켜보세요. 논리뿐만 아니라 직감을 따르는 것이 중요하다.
+			        </p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</section>
+
+		<section id="personal" class="container2 bg-pic3">
+			<h1 class="fade-in-text">PERSONAL GROWTH</h1>
+			<p class="subtitle fade-in-text">What do the cards say about your personal growth?</p>
+
+			<div class="cards">
+				<img src="cardback.png" alt="Tarot Card" class="card1" onclick="showPersonalResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card2" onclick="showPersonalResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card3" onclick="showPersonalResult()">
+			</div>
+
+			<a href="#" class="cta-button" id="drawButton">Draw Tarot →</a>
+		</section>
+
+		<section id="personalResult" class="container2 bg-pic3" style="display: none;">
+			<h1 class="fade-in-text">Personal Growth</h1>
+			<p class="subtitle fade-in-text">Choose one card below</p>
+			<div class="result-content-side">
+			  <img src="TheWorld.png" alt="The World" class="cardresult">
+
+			  <div class="text-box-group">
+			    <div class="result-box">
+			      <div class="result-title">The World – Personal Growth</div>
+			      <div class="result-body">
+			        <p>
+			          The World signifies completion, self-awareness, and spiritual fulfillment. You’ve grown through challenges and are now stepping into a more integrated, balanced version of yourself. It’s a reminder that you are enough — celebrate how far you’ve come.
+			        </p>
+			        <p class="result-advice">
+			          <strong>Advice:</strong><br>
+			          Embrace the wholeness within you. Trust that you are exactly where you need to be.
+			        </p>
+			      </div>
+			    </div>
+
+			    <div class="result-box">
+			      <div class="result-title">세계 카드 – 개인 성장</div>
+			      <div class="result-body">
+			        <p>
+			          세계 카드는 완성, 자기 인식, 그리고 영적 충만감을 나타낸다. 당신은 많은 도전을 통해 성장해왔고, 이제 더 균형 잡히고 통합된 자신으로 나아가고 있다. 지금 이 순간, 당신은 충분합니다 — 지금까지의 여정을 기쁘게 받아들이세요.
+			        </p>
+			        <p class="result-advice">
+			          <strong>추천:</strong><br>
+			          자신 안의 완전함을 포용하세요. 지금 당신은 있어야 할 자리에 있다. 
+			        </p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</section>
+
+		<section id="health" class="container2 bg-pic4">
+			<h1 class="fade-in-text">HEALTH & ENERGY</h1>
+			<p class="subtitle fade-in-text">What do the cards say about your health state?</p>
+
+			<div class="cards">
+				<img src="cardback.png" alt="Tarot Card" class="card1" onclick="showHealthResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card2" onclick="showHealthResult()">
+				<img src="cardback.png" alt="Tarot Card" class="card3" onclick="showHealthResult()">
+			</div>
+
+			<a href="#" class="cta-button" id="drawButton">Draw Tarot →</a>
+		</section>
+
+		<section id="healthResult" class="container2 bg-pic4" style="display: none;">
+			<h1 class="fade-in-text">Health & Energy</h1>
+			<p class="subtitle fade-in-text">Choose one card below</p>
+			<div class="result-content-side">
+			  <img src="ThreeOfSwords.png" alt="ThreeOfSwords" class="cardresult">
+
+			  <div class="text-box-group">
+			    <div class="result-box">
+			      <div class="result-title">Three Of Swords – Health & Energy</div>
+			      <div class="result-body">
+			        <p>
+			          This card points to emotional pain that may be affecting your physical or mental health. Stress, heartbreak, or unresolved grief could be draining your energy. Healing begins with acknowledging what hurts — allow yourself to process and release.
+			        </p>
+			        <p class="result-advice">
+			          <strong>Advice:</strong><br>
+			          Don’t suppress emotions. Gentle self-care and emotional honesty are key to recovery.
+			        </p>
+			      </div>
+			    </div>
+
+			    <div class="result-box">
+			      <div class="result-title">세 개의 검 – 건강 & 에너지</div>
+			      <div class="result-body">
+			        <p>
+			          이 카드는 감정적인 고통이 신체적 또는 정신적 건강에 영향을 줄 수 있음을 나타낸다. 스트레스, 상심, 해결되지 않은 슬픔이 에너지를 소모시키고 있을 수 있다. 치유는 아픔을 인정하는 것에서 시작된다 — 감정을 억누르지 말고 흘려보내세요.
+			        </p>
+			        <p class="result-advice">
+			          <strong>추천:</strong><br>
+			          감정을 외면하지 마세요. 부드러운 자기 돌봄과 감정에 대한 솔직함이 회복의 열쇠이다. 
+			        </p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<a href="#" class="cta-button" onclick="location.reload()">Redraw Tarot →</a>
+		</section>
+
+		<section id="end" class="container">
+  
+			<h1 class="fade-in-text">The Cards Have Spoken</h1>
+			<h2>May these Tarot insights bring clarity to your day.<br>Thank you for your trust.</h2>
+			<div class="card-flip" id="finalCard">
+			  <div class="card-inner">
+			    <div class="card-front">
+			      <img class="cardback" src="cardback.png">
+			    </div>
+			    <div class="card-back">
+			      <img class="card-end" src="WheelOfFortune.png">
+			    </div>
+			  </div>
+			</div>
+		</section>
+
+</body>
+
+<script>
+ function hideAllSections() {
+document.getElementById("loveResult").style.display = "none";
+document.getElementById("careerResult").style.display = "none";
+document.getElementById("personalResult").style.display = "none";
+document.getElementById("healthResult").style.display = "none";
+}
+
+const loveCards = [
+  {
+    image: "QueenOfSwords.png",
+    titleEN: "Queen of Swords – Love & Relationships",
+    descEN: "A time for honesty and clear thinking in love. This card suggests emotional maturity, healthy boundaries, and the courage to see things as they are.",
+    adviceEN: "Love wisely. Be kind, but don’t ignore red flags.",
+    titleKR: "검의 여왕 – 사랑과 관계",
+    descKR: "사랑에서 정직함과 명확한 사고가 필요한 시기이다. 이 카드는 감정적 성숙, 건강한 경계 설정, 그리고 상황을 있는 그대로 바라보는 용기를 의미한다.",
+    adviceKR: "현명하게 사랑하세요. 친절하되, 경고 신호를 무시하지 마세요."
+  },
+  {
+    image: "TheHermit.png",
+    titleEN: "The Hermit – Love & Relationships",
+    descEN: "The Hermit suggests a period of introspection or emotional distance in your love life. You may need time alone to reflect on your needs, desires, or past experiences.",
+    adviceEN: "Honor your inner journey. Clarity in love comes from understanding yourself first.",
+    titleKR: "은둔자 – 사랑과 관계",
+    descKR: "은둔자 카드는 사랑에서의 거리감 또는 내면 성찰의 시기를 의미한다. 당신은 자신의 감정, 필요, 과거의 경험을 되돌아보며 혼자만의 시간이 필요할 수 있다.",
+    adviceKR: "당신의 내면 여정을 존중하세요. 진정한 사랑은 자신을 이해하는 것에서 시작된다."
+  },
+  {
+    image: "ThreeOfCups.png",
+    titleEN: "Three of Cups – Love & Relationships",
+    descEN: "The Three of Cups brings joyful connection, celebration, and emotional support. In love, it can point to a relationship surrounded by friendship and shared happiness.",
+    adviceEN: "Celebrate love in all its forms — romantic, platonic, or communal.",
+    titleKR: "세 개의 컵 – 사랑과 관계",
+    descKR: "세 개의 컵 카드는 즐거운 연결, 축하, 그리고 감정적 지지를 상징합니다. 연애에서는 우정과 기쁨이 함께하는 관계를 나타냅니다.",
+    adviceKR: "사랑의 다양한 형태를 기쁘게 받아들이세요. 함께하는 즐거움을 소중히 하세요."
+  }, 
+  {
+    image: "Temperance.png",
+    titleEN: "Temperance – Love & Relationships",
+    descEN: "Temperance symbolizes harmony, balance, and emotional patience in relationships. It suggests a healthy dynamic based on mutual respect, compromise, and calm communication. If there’s tension, this card encourages healing through understanding and gentleness.",
+    adviceEN: "Take things slowly. Practice empathy, listen deeply, and meet halfway — true connection grows with time and care.",
+    titleKR: "절제 – 사랑 & 관계",
+    descKR: "절제 카드는 조화, 균형, 그리고 감정적 인내심을 나타낸다. 관계 속에서 서로를 존중하고 타협하며, 차분하게 소통하는 건강한 흐름을 의미한다. 만약 갈등이 있다면, 이 카드는 이해와 부드러움으로 회복할 수 있음을 말해준다.",
+    adviceKR: "서두르지 마세요. 공감하고, 깊이 들어주며, 중간에서 만나려는 노력이 진정한 유대를 키워준다."
+  }
+];
+
+
+function showLoveResult() {
+  document.getElementById("love").style.display = "none";
+  //hideAllSections();
+
+  const randomCard = loveCards[Math.floor(Math.random() * loveCards.length)];
+
+  document.querySelector("#loveResult .cardresult").src = randomCard.image;
+  document.querySelector("#loveResult .result-box:nth-of-type(1) .result-title").innerText = randomCard.titleEN;
+  document.querySelector("#loveResult .result-box:nth-of-type(1) .result-body p").innerText = randomCard.descEN;
+  document.querySelector("#loveResult .result-box:nth-of-type(1) .result-body .result-advice").innerHTML = `<strong>Advice:</strong><br>${randomCard.adviceEN}`;
+
+  document.querySelector("#loveResult .result-box:nth-of-type(2) .result-title").innerText = randomCard.titleKR;
+  document.querySelector("#loveResult .result-box:nth-of-type(2) .result-body p").innerText = randomCard.descKR;
+  document.querySelector("#loveResult .result-box:nth-of-type(2) .result-body .result-advice").innerHTML = `<strong>추천:</strong><br>${randomCard.adviceKR}`;
+
+  document.getElementById("loveResult").style.display = "block";
+}
+	  
+const careerCards = [
+  {
+    image: "TheMoon.png",
+    titleEN: "The Moon – Career & Finances",
+    descEN: "The Moon indicates uncertainty, confusion, or hidden factors in your work or financial situation. Things may not be as they seem — trust your intuition, and avoid making major decisions until you have more clarity. Be cautious of illusions or misleading offers.",
+    adviceEN: "Take time to reflect. Don’t rush. Follow your instincts, not just logic.",
+    titleKR: "달 카드 – 직업 & 재정",
+    descKR: "달 카드는 직장이나 재정 상황에서 불확실성이나 혼란, 또는 감춰진 요소들이 있음을 나타낸다. 겉보기와 다른 진실이 있을 수 있으니, 직관을 믿고 섣부른 결정을 피하세요. 허상이나 속이는 제안에 주의가 필요하다.",
+    adviceKR: "서두르지 말고 시간을 갖고 상황을 지켜보세요. 논리뿐만 아니라 직감을 따르는 것이 중요하다."
+  },
+  {
+    image: "AceOfSwords.png",
+    titleEN: "Ace Of Swords – Career & Finances",
+    descEN: "The Ace of Swords signals a breakthrough, mental clarity, or a powerful new idea. In your career, it may mark the start of a bold project, clear decision-making, or a moment of truth. Financially, it can indicate a need for honest evaluation or sharp planning.",
+    adviceEN: "Use your mind as your greatest tool. Speak with integrity, act with precision, and don’t fear new beginnings.",
+    titleKR: "에이스 오브 소즈 – 직업 & 재정",
+    descKR: "소드의 에이스는 돌파구, 명확한 사고, 또는 강력한 아이디어의 시작을 의미한다. 직장에서 새로운 프로젝트나 중요한 결정을 내릴 기회가 있을 수 있고, 재정적으로는 정직한 평가와 날카로운 계획이 필요함을 나타낸다..",
+    adviceKR: "당신의 지성과 판단력을 믿으세요. 정확하고 진실되게 행동하며, 새로운 시작을 두려워하지 마세요."
+  },
+  {
+    image: "PageOfPentacles.png",
+    titleEN: "Page Of Pentacles – Career & Finances",
+    descEN: "The Page of Pentacles represents new opportunities for growth or financial planning. It suggests a time to focus on long-term goals, skill-building. You may be at the beginning of a promising career path or investment.",
+    adviceEN: "Stay curious, patient, and committed. Success will come through steady effort and dedication.",
+    titleKR: "펜타클의 페이지 – 직업 & 재정",
+    descKR: "펜타클의 페이지는 성장, 학습에 대한 새로운 기회를 나타낸다. 지금은 장기적인 목표에 집중하고, 기술을 익히며, 실질적인 시작을 할 시기이다. 유망한 커리어나 투자 초기 단계에 있을 수 있다.",
+    adviceKR: "호기심과 인내심, 그리고 성실함을 유지하세요. 꾸준한 노력이 결국 성공으로 이어질 것이다."
+  },
+  {
+    image: "TwoOfCups.png",
+    titleEN: "Two Of Cups – Career & Finances",
+    descEN: "The Two of Cups in career and finances highlights partnership, collaboration, and mutual trust. It may signal a strong business alliance, successful negotiation, or finding harmony with a colleague or client. Financially, this card can point to balanced agreements and shared goals.",
+    adviceEN: "Value cooperation over competition. When you build trust and mutual respect, prosperity follows.",
+    titleKR: "컵 2 – 직업 & 재정",
+    descKR: "컵 2 카드는 직업과 재정 분야에서 파트너십, 협력, 상호 신뢰를 상징한다. 비즈니스 관계의 성공, 좋은 계약 체결, 또는 동료와의 조화로운 협업을 의미할 수 있다. 재정적으로는 균형 잡힌 거래나 공동의 목표를 암시한다.",
+    adviceKR: "경쟁보다 협력을 우선하세요. 신뢰와 존중을 기반으로 하면 성공과 풍요가 따른다."
+  }
+];
+
+
+function showCareerResult() {
+  document.getElementById("career").style.display = "none";
+  //hideAllSections();
+
+  const randomCard = careerCards[Math.floor(Math.random() * careerCards.length)];
+
+  document.querySelector("#careerResult .cardresult").src = randomCard.image;
+  document.querySelector("#careerResult .result-box:nth-of-type(1) .result-title").innerText = randomCard.titleEN;
+  document.querySelector("#careerResult .result-box:nth-of-type(1) .result-body p").innerText = randomCard.descEN;
+  document.querySelector("#careerResult .result-box:nth-of-type(1) .result-body .result-advice").innerHTML = `<strong>Advice:</strong><br>${randomCard.adviceEN}`;
+
+  document.querySelector("#careerResult .result-box:nth-of-type(2) .result-title").innerText = randomCard.titleKR;
+  document.querySelector("#careerResult .result-box:nth-of-type(2) .result-body p").innerText = randomCard.descKR;
+  document.querySelector("#careerResult .result-box:nth-of-type(2) .result-body .result-advice").innerHTML = `<strong>추천:</strong><br>${randomCard.adviceKR}`;
+
+  document.getElementById("careerResult").style.display = "block";
+}
+
+const personalCards = [
+  {
+    image: "TheWorld.png",
+    titleEN: "The World – Personal Growth",
+    descEN: "The World signifies completion, self-awareness, and spiritual fulfillment. You’ve grown through challenges and are now stepping into a more integrated, balanced version of yourself. It’s a reminder that you are enough — celebrate how far you’ve come.",
+    adviceEN: "Embrace the wholeness within you. Trust that you are exactly where you need to be.",
+    titleKR: "세계 카드 – 개인 성장",
+    descKR: "세계 카드는 완성, 자기 인식, 그리고 영적 충만감을 나타낸다. 당신은 많은 도전을 통해 성장해왔고, 이제 더 균형 잡히고 통합된 자신으로 나아가고 있다. 지금 이 순간, 당신은 충분합니다 — 지금까지의 여정을 기쁘게 받아들이세요.",
+    adviceKR: "자신 안의 완전함을 포용하세요. 지금 당신은 있어야 할 자리에 있다."
+  },
+  {
+    image: "KingOfPentacles.png",
+    titleEN: "King Of Pentacles – Personal Growth",
+    descEN: "The King of Pentacles symbolizes maturity, stability, and mastery over the material world. In personal growth, this card suggests you've cultivated strong values, discipline, and a grounded sense of self. You are learning to build a secure and abundant life through patience, wisdom, and responsibility.",
+    adviceEN: "Embrace your inner leader. Trust in your ability to create lasting success through consistency and integrity.",
+    titleKR: "펜타클의 왕 – 개인 성장",
+    descKR: "펜타클의 왕은 성숙함, 안정감, 그리고 물질 세계에 대한 통달을 상징한다. 개인 성장의 측면에서는 당신이 확고한 가치관, 자기 절제, 그리고 단단한 자아감을 키워가고 있음을 나타낸다. 인내와 책임감, 그리고 현명한 선택을 통해 안정적이고 풍요로운 삶을 구축해 나가고 있다.",
+    adviceKR: "당신 안의 리더십을 믿으세요. 일관성과 진실성을 통해 지속 가능한 성장을 이룰 수 있다."
+  },
+  {
+    image: "TheFool.png",
+    titleEN: "The Fool – Personal Growth",
+    descEN: "The Fool represents new beginnings, openness, and trust in the journey ahead. In personal growth, it suggests you're entering a phase of self-discovery where curiosity and courage are more important than certainty. It’s a call to release fear and embrace your path with a fresh heart and open mind.",
+    adviceEN: "Let go of limits. Take a leap of faith — growth comes from exploration, not perfection.",
+    titleKR: "바보 – 개인 성장",
+    descKR: "바보 카드는 새로운 시작, 열린 마음, 그리고 인생 여정에 대한 신뢰를 상징한다다. 개인 성장에서는 확실함보다 호기심과 용기가 더 중요한 시기로, 자기 발견의 여정에 들어섰음을 의미한다. 두려움을 내려놓고 순수한 마음으로 길을 받아들이세요.",
+    adviceKR: "한계를 내려놓고 도전해 보세요. 완벽이 아니라 탐험을 통해 진정한 성장이 찾아온다."
+  },
+  {
+    image: "TheSun.png",
+    titleEN: "The Sun – Personal Growth",
+    descEN: "The Sun represents confidence, joy, and authentic self-expression. In personal growth, it signals a phase of clarity, inner radiance, and embracing who you truly are. You’re stepping into your light — with optimism, vitality, and a renewed sense of purpose.",
+    adviceEN: "Shine without fear. Trust your journey, and let your true self be seen and celebrated.",
+    titleKR: "태양 – 개인 성장",
+    descKR: "태양 카드는 자신감, 기쁨, 그리고 진정한 자기 표현을 의미한다. 개인 성장의 측면에서 이는 내면의 빛이 드러나는 시기, 명확한 자아 인식과 삶의 목적을 되찾는 과정을 나타낸다. 지금 당신은 자신만의 빛을 세상에 비추고 있다.",
+    adviceKR: "두려움 없이 자신을 드러내세요. 당신의 길을 믿고, 있는 그대로의 당신을 축복하세요."
+  }
+];
+
+
+function showPersonalResult() {
+  document.getElementById("personal").style.display = "none";
+  //hideAllSections();
+
+  const randomCard = personalCards[Math.floor(Math.random() * personalCards.length)];
+
+  document.querySelector("#personalResult .cardresult").src = randomCard.image;
+  document.querySelector("#personalResult .result-box:nth-of-type(1) .result-title").innerText = randomCard.titleEN;
+  document.querySelector("#personalResult .result-box:nth-of-type(1) .result-body p").innerText = randomCard.descEN;
+  document.querySelector("#personalResult .result-box:nth-of-type(1) .result-body .result-advice").innerHTML = `<strong>Advice:</strong><br>${randomCard.adviceEN}`;
+
+  document.querySelector("#personalResult .result-box:nth-of-type(2) .result-title").innerText = randomCard.titleKR;
+  document.querySelector("#personalResult .result-box:nth-of-type(2) .result-body p").innerText = randomCard.descKR;
+  document.querySelector("#personalResult .result-box:nth-of-type(2) .result-body .result-advice").innerHTML = `<strong>추천:</strong><br>${randomCard.adviceKR}`;
+
+  document.getElementById("personalResult").style.display = "block";
+}
+
+const healthCards = [
+  {
+    image: "ThreeOfSwords.png",
+    titleEN: "Three Of Swords – Health & Energy",
+    descEN: "This card points to emotional pain that may be affecting your physical or mental health. Stress, heartbreak, or unresolved grief could be draining your energy. Healing begins with acknowledging what hurts — allow yourself to process and release.",
+    adviceEN: "Don’t suppress emotions. Gentle self-care and emotional honesty are key to recovery.",
+    titleKR: "세 개의 검 – 건강 & 에너지",
+    descKR: "이 카드는 감정적인 고통이 신체적 또는 정신적 건강에 영향을 줄 수 있음을 나타낸다. 스트레스, 상심, 해결되지 않은 슬픔이 에너지를 소모시키고 있을 수 있다. 치유는 아픔을 인정하는 것에서 시작된다 — 감정을 억누르지 말고 흘려보내세요.",
+    adviceKR: "감정을 외면하지 마세요. 부드러운 자기 돌봄과 감정에 대한 솔직함이 회복의 열쇠이다."
+  },
+  {
+    image: "TheEmpress.png",
+    titleEN: "The Empress – Health & Energy",
+    descEN: "The Empress signifies vitality, nurturing energy, and a strong connection to the body and nature. In health, it suggests a time of renewal, fertility, or the need to care deeply for your physical and emotional well-being. It's a reminder to nourish yourself with rest, good food, beauty, and self-love.",
+    adviceEN: "Prioritize self-care and embrace your body’s natural rhythms. Healing flows when you feel safe, loved, and grounded.",
+    titleKR: "여제 – 건강 & 에너지",
+    descKR: "여제 카드는 생명력, 양육의 에너지, 그리고 신체와 자연과의 깊은 연결을 나타낸다. 건강의 측면에서 이는 회복, 풍요, 또는 자신을 돌보는 필요성을 의미할 수 있다. 충분한 휴식, 건강한 음식, 아름다움, 그리고 자기 사랑으로 스스로를 보살피라는 신호이다",
+    adviceKR: "자기 돌봄을 우선시하고, 몸의 자연스러운 리듬을 존중하세요. 안정과 사랑 속에서 치유는 자연스럽게 흐른다"
+  },
+  {
+    image: "NineOfPentacles.png",
+    titleEN: "Nine Of Pentacles – Health & Energy",
+    descEN: "The Nine of Pentacles reflects balance, self-sufficiency, and physical well-being. It suggests a period of stability and enjoyment in your health journey — the result of past efforts to care for yourself. You may feel more connected to your body, nature, and a peaceful routine.",
+    adviceEN: "Enjoy the rewards of your self-care. Keep honoring your body through mindfulness, balance, and gratitude.",
+    titleKR: "펜타클 9 – 건강 & 에너지",
+    descKR: "펜타클 9는 균형, 자립, 그리고 신체적 안정감을 상징한다. 그동안 자신을 잘 돌본 결과로 건강과 에너지의 안정기에 접어들었음을 의미한다. 자연과의 연결감, 몸에 대한 자각, 그리고 편안한 루틴 속에서 에너지가 흐르고 있다.",
+    adviceKR: "그동안의 자기 돌봄의 결실을 즐기세요. 감사함과 균형으로 몸을 계속 소중히 하세요."
+  },
+  {
+    image: "TheMagician.png",
+    titleEN: "The Magician – Health & Energy",
+    descEN: "The Magician symbolizes powerful potential, focus, and the ability to direct your energy intentionally. In health, it suggests that you have the tools and willpower to improve your well-being. It’s a great time to take initiative — your body and mind are ready for transformation.",
+    adviceEN: "Align your thoughts, habits, and actions. You have more control over your energy and health than you think.",
+    titleKR: "마법사 – 건강 & 에너지",
+    descKR: "마법사 카드는 강력한 잠재력, 집중력, 그리고 에너지를 의도적으로 다루는 능력을 의미한다. 건강 면에서는 자신의 의지와 도구를 통해 몸과 마음의 상태를 개선할 수 있음을 나타낸다. 지금은 변화를 위한 행동을 시작하기에 매우 좋은 시기이다.",
+    adviceKR: "생각과 습관, 행동을 일치시켜보세요. 당신은 자신의 건강과 에너지를 변화시킬 수 있는 힘을 이미 가지고 있다."
+  }
+];
+
+
+function showHealthResult() {
+  document.getElementById("health").style.display = "none";
+  //hideAllSections();
+
+  const randomCard = healthCards[Math.floor(Math.random() * healthCards.length)];
+
+  document.querySelector("#healthResult .cardresult").src = randomCard.image;
+  document.querySelector("#healthResult .result-box:nth-of-type(1) .result-title").innerText = randomCard.titleEN;
+  document.querySelector("#healthResult .result-box:nth-of-type(1) .result-body p").innerText = randomCard.descEN;
+  document.querySelector("#healthResult .result-box:nth-of-type(1) .result-body .result-advice").innerHTML = `<strong>Advice:</strong><br>${randomCard.adviceEN}`;
+
+  document.querySelector("#healthResult .result-box:nth-of-type(2) .result-title").innerText = randomCard.titleKR;
+  document.querySelector("#healthResult .result-box:nth-of-type(2) .result-body p").innerText = randomCard.descKR;
+  document.querySelector("#healthResult .result-box:nth-of-type(2) .result-body .result-advice").innerHTML = `<strong>추천:</strong><br>${randomCard.adviceKR}`;
+
+  document.getElementById("healthResult").style.display = "block";}
+
+document.getElementById("finalCard").addEventListener("click", function() {const cardInner = this.querySelector(".card-inner");
+	if (!cardInner.classList.contains("burning")) {
+    cardInner.classList.remove("spinCard");
+    cardInner.classList.add("burning");}});
+</script>
+
+</script>
+</html>
